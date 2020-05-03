@@ -1,6 +1,6 @@
 # Kong External Auth
 
-Kong plugin to authenticate requests using http services.
+Kong plugin to authenticate requests using HTTP services.
 
 ## Description
 
@@ -30,7 +30,8 @@ Add it to a service calling the admin api:
 ```bash
 $ curl -X POST http://kong:8001/services/{service}/plugins \
   -d 'name=external-auth' \
-  -d 'config.url=http://auth-service/'
+  -d 'config.url=http://auth-service'
+  -d 'config.url=/'
 ```
 
 | Parameter | default | description |
