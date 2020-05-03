@@ -36,7 +36,7 @@ $ curl -X POST http://kong:8001/services/{service}/plugins \
 
 | Parameter | default | description |
 | ---       | ---     | ---         |
-| `config.url` | [required] | Service receiving the original request method, query, headers. **Http** and **https** are allowed. |
+| `config.url` | [required] | Service receiving the original request method, query, headers. **HTTP** and **HTTPS** are allowed. |
 | `config.path` | [required] | Path to your auth api |
 | `config.connect_timeout` | 10000 | Connection timeout (in ms) to the provided url. |
 | `config.send_timeout` | 60000 | Send timeout (in ms) to the provided url. |
