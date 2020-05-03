@@ -14,13 +14,13 @@ In any other case, `401` (Unauthorized) is returned to the client.
 ## Installation
 
 ```bash
-$ luarocks install external-auth
+$ luarocks install kong-external-auth
 ```
 
-Update the `plugins` config to add `external-auth`:
+Update the `plugins` config to add `kong-external-auth`:
 
 ```
-plugins = bundled,external-auth
+plugins = bundled,kong-external-auth
 ```
 
 ## Configuration
@@ -35,7 +35,8 @@ $ curl -X POST http://kong:8001/services/{service}/plugins \
 
 | Parameter | default | description |
 | ---       | ---     | ---         |
-| `config.url` | [required] | Service receiving the original request method, path, query, headers. **Http** and **https** are allowed. |
+| `config.url` | [required] | Service receiving the original request method, query, headers. **Http** and **https** are allowed. |
+| `config.path` | [required] | Path to your auth api |
 | `config.connect_timeout` | 10000 | Connection timeout (in ms) to the provided url. |
 | `config.send_timeout` | 60000 | Send timeout (in ms) to the provided url. |
 | `config.read_timeout` | 60000 | Read timeout (in ms) to the provided url. |
