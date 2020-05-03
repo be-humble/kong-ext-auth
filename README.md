@@ -31,7 +31,7 @@ Add it to a service calling the admin api:
 $ curl -X POST http://kong:8001/services/{service}/plugins \
   -d 'name=external-auth' \
   -d 'config.url=http://auth-service'
-  -d 'config.url=/'
+  -d 'config.path=/'
 ```
 
 | Parameter | default | description |
