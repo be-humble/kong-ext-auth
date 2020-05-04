@@ -13,10 +13,10 @@ function ExternalAuthHandler:access(conf)
   ExternalAuthHandler.super.access(self)
 
   local client = http.new()
-  client:set_timeouts(conf.connect_timeout, send_timeout, read_timeout)
+  client:set_timeouts(conf.connect_timeout, conf.send_timeout, conf.read_timeout)
 
   local res, err = client:request_uri(conf.url, {
-    method = kong.request.get_method(),
+    method = conf.method,
     path = conf.path,
     query = kong.request.get_raw_query(),
     headers = kong.request.get_headers(),

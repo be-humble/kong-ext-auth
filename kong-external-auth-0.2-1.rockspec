@@ -1,5 +1,5 @@
 package = "kong-external-auth"
-version = "0.1-3"
+version = "0.2-1"
 supported_platforms = {"linux", "macosx"}
 source = {
   url = "git://github.com/wiput1999/kong-external-auth",
