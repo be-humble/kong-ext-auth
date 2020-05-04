@@ -29,7 +29,7 @@ Add it to a service calling the admin api:
 
 ```bash
 $ curl -X POST http://kong:8001/services/{service}/plugins \
-  -d 'name=external-auth' \
+  -d 'name=kong-external-auth' \
   -d 'config.url=http://auth-service'
   -d 'config.path=/'
 ```
