@@ -3,6 +3,7 @@
 Kong plugin to authenticate requests using external HTTP service.
 
 ## Description
+![Kong Ext Auth Schema](schema.png)
 
 This plugin lets you authenticate any request using a separate HTTP service.
 
