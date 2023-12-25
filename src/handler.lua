@@ -1,21 +1,18 @@
-local BasePlugin = require "kong.plugins.base_plugin"
+local ExternalAuthHandler = {
+  VERSION  = "0.2.1",
+  PRIORITY = 900,
+}
 local http = require "resty.http"
 local cjson = require "cjson"
 local kong = kong
-local ExternalAuthHandler = BasePlugin:extend()
 
-function ExternalAuthHandler:new()
-  ExternalAuthHandler.super.new(self, "kong-ext-auth")
-end
-
-function ExternalAuthHandler:access(conf)
-  ExternalAuthHandler.super.access(self)
+function ExternalAuthHandler:access(config)
   local client = http.new()
-  client:set_timeouts(conf.connect_timeout, conf.send_timeout, conf.read_timeout)
+  client:set_timeouts(config.connect_timeout, config.send_timeout, config.read_timeout)
 
   local res, err = client:request_uri(conf.url, {
-    method = conf.method,
-    path = conf.path,
+    method = config.method,
+    path = config.path,
     query = kong.request.get_raw_query(),
     headers = kong.request.get_headers(),
     body = kong.request.get_raw_body()
@@ -25,15 +22,12 @@ function ExternalAuthHandler:access(conf)
   end
   
   if res.status ~= 200 then
-    return kong.response.exit(401, {message="Invalid authentication credentials"})
+    return kong.response.exit(401, {message="Invalid authentication credentials."})
   end
 
   local token = cjson.decode(res.body)
-  kong.service.request.set_header(conf.header_request, "Bearer " .. token[conf.json_token_key])
+  kong.service.request.set_header(config.header_request, "Bearer " .. token[config.json_token_key])
 
 end
-
-ExternalAuthHandler.PRIORITY = 900
-ExternalAuthHandler.VERSION = "0.2.0"
 
 return ExternalAuthHandler
